@@ -1,7 +1,7 @@
 <script>
     <?php if ($error): ?>
         Swal.fire({
-            title: "เพิ่มสินค้าไม่สำเร็จ",
+            title: "เพิ่มร้านอาหารไม่สำเร็จ",
             text: "<?= $message ?>",
             icon: "error"
         }).then(function() {
@@ -9,7 +9,7 @@
         });
     <?php else: ?>
         Swal.fire({
-            title: "เพิ่มสินค้าสำเร็จ!",
+            title: "เพิ่มร้านอาหารสำเร็จ!",
             text: "<?= $message ?>",
             icon: "success"
         }).then(function() {

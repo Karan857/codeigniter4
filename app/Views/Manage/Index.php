@@ -1,11 +1,12 @@
-<div class="container">
-    <a href="<?= base_url('product/create'); ?>" class="btn btn-primary my-3">เพิ่มร้านอาหาร</a>
+<div class="container ">
+    <a href="<?= base_url('manage/create'); ?>" class="btn btn-primary my-3">เพิ่มสถานที่ท่องเที่ยว</a>
     <table class="table table-hover table-bordered text-center ">
         <thead>
             <tr>
                 <th scope="col" class="text-center">ลำดับ</th>
-                <th scope="col">ร้านอาหาร</th>
+                <th scope="col">สถานที่ท่องเที่ยว</th>
                 <th scope="col" width="500">รายละเอียด</th>
+                <th scope="col">ข้าเข้า / บาท</th>
                 <th scope="col">ตำแหน่งที่ตั้ง</th>
                 <th scope="col">รูปภาพ</th>
                 <th scope="col" class="text-center" width="60">แก้ไข</th>
@@ -13,20 +14,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($products as $index => $row): ?>
+            <?php foreach ($product as $index => $row): ?>
                 <tr>
                     <th class="text-center" scope="row"><?= ($index + 1); ?></th>
                     <td><?= $row['name']; ?></td>
-                    <td><?= $row['desc']; ?></td>
+                    <td><?= $row['description']; ?></td>
+                    <td><?= $row['price']; ?></td>
                     <td><?= $row['location']; ?></td>
                     <td>
-                        <img src="<?= base_url() . $row['image']; ?>" width="100" alt="<?= $row['image']; ?>">
+                        <img src="<?= base_url() . $row['image']; ?>" width="100" alt="<?= $row['name']; ?>">
                     </td>
                     <td class="text-center">
-                        <a href="<?= base_url('product/update/' . $row['food_id']); ?>" class="btn btn-success">แก้ไข</a>
+                        <a href="<?= base_url('manage/update/' . $row['product_id']); ?>" class="btn btn-success">แก้ไข</a>
                     </td>
                     <td class="text-center">
-                        <button action="delete" data-id="<?= $row['food_id']; ?>" class="btn btn-danger">ลบ</button>
+                        <button action="delete" data-id="<?= $row['product_id']; ?>" class="btn btn-danger">ลบ</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -46,7 +48,7 @@
                     showCancelButton: true,
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        location.href = '<?= base_url() . 'product/delete/' ?>' + target.dataset.id;
+                        location.href = '<?= base_url() . 'manage/delete/' ?>' + target.dataset.id;
                     }
                 });
             }

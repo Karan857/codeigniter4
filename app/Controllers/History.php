@@ -4,13 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\Template;
 
-class Me extends BaseController{
+class History extends BaseController{
     public function Index()
     {
         $template = new Template();
-        return $template->Render('Me/Index',
+        return $template->Render('History/Index',
             array(
-                'title' => 'me-page'
+                'title' => 'History'
             )
         );
     }

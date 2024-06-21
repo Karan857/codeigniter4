@@ -1,3 +1,3 @@
-<div class="container py-3 text-white text-center">
-    <span>Copyright ร้านขายดี</span>
+<div class="py-3 text-dark text-center ">
+    <span>Copyright visit Nakhonphathom</span>
 </div>
