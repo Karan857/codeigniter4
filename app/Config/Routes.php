@@ -11,6 +11,10 @@ $routes->get('/shop', 'Shop::Index');
 $routes->get('/about/shipping', 'About::Shipping');
 $routes->get('/about/contact', 'About::Contact');
 
+$routes->get('/me', 'Me::Index');
+
+
+
 $routes->get('/login', 'Login::Index');
 $routes->post('/login/check', 'Login::Check');
 $routes->get('/logout', 'Logout::Index');
