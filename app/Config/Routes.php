@@ -28,3 +28,19 @@ $routes->post('/product/create/submit', 'Product::SubmitCreate');
 $routes->get('/product/update/(:num)', 'Product::Update/$1');
 $routes->post('/product/update/submit', 'Product::SubmitUpdate');
 $routes->get('/product/delete/(:num)', 'Product::Delete/$1');
+
+//api
+$routes->resource('api/user');
+
+//get
+$routes->get('/api/user','Api\User::Index');
+$routes->get('/api/user/(:num)','Api\User::Show/$1');
+
+//post
+$routes->post('/api/user','Api\User::Create');
+
+//update
+$routes->put('/api/user','Api\User::Modify');
+
+//delete
+$routes->delete('/api/user/(:num)','Api\User::Delete/$1');
