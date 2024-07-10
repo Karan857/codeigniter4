@@ -15,7 +15,8 @@ class Shop extends BaseController
 
         helper('number');
         $template = new Template();
-        return $template->Render('Shop/Index',
+        return $template->Render(
+            'Shop/Index',
             array(
                 'title' => 'สินค้า',
                 'products' => $products
