@@ -23,6 +23,10 @@ class Product extends BaseController
         $productModel = new ProductModel();
         $products = $productModel->findAll();
 
+        foreach ($products as &$product) {
+            $product['price'] = number_format($product['price']);
+        }
+
         return (new Template())->Render(
             'Product/Index',
             array(

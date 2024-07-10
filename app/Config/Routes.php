@@ -6,25 +6,14 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
- // menu
+// menu
 $routes->get('/', 'Home::Index');
 $routes->get('/home', 'Home::Index');
 $routes->get('/shop', 'Shop::Index');
-$routes->get('/about/shipping', 'About::Shipping');
-$routes->get('/about/contact', 'About::Contact');
-$routes->get('/history', 'History::Index');
 
-// home
-$routes->get('/attractions', 'Attractions::Index');
-$routes->get('/food', 'Food::Index');
+// home for user
+$routes->get('/list', 'Home::List');
 
-//manage
-$routes->get('/manage', 'Manage::Index');
-$routes->get('/manage/create', 'Manage::Create');
-$routes->post('/manage/create/submit', 'Manage::SubmitCreate');
-$routes->get('/manage/update/(:num)', 'Manage::Update/$1');
-$routes->post('/manage/update/submit', 'Manage::SubmitUpdate');
-$routes->get('/manage/delete/(:num)', 'Manage::Delete/$1');
 
 //auth
 $routes->get('/login', 'Login::Index');
@@ -52,14 +41,14 @@ $routes->get('/product/delete/(:num)', 'Product::Delete/$1');
 $routes->resource('api/user');
 
 //get
-$routes->get('/api/user','Api\User::Index');
-$routes->get('/api/user/(:num)','Api\User::Show/$1');
+$routes->get('/api/user', 'Api\User::Index');
+$routes->get('/api/user/(:num)', 'Api\User::Show/$1');
 
 //post
-$routes->post('/api/user','Api\User::Create');
+$routes->post('/api/user', 'Api\User::Create');
 
 //update
-$routes->put('/api/user','Api\User::Modify');
+$routes->put('/api/user', 'Api\User::Modify');
 
 //delete
-$routes->delete('/api/user/(:num)','Api\User::Delete/$1');
+$routes->delete('/api/user/(:num)', 'Api\User::Delete/$1');
