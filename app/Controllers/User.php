@@ -96,7 +96,8 @@ class User extends BaseController
                 'password' => $password,
                 'name' => $name,
                 'email' => $email,
-                'phone_number' => $phoneNumber
+                'phone_number' => $phoneNumber,
+                'role' => 'user'
             )
         );
         if ($insert)
