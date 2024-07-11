@@ -89,7 +89,7 @@
                             <?= $product['price']; ?> บาท
                         </p>
                         <p class="text-md text-gray-900 dark:text-white mb-5">&nbsp;<?= $product['desc']; ?></p>
-                        <p class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-end float-end mb-2">
+                        <p onClick="me()" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 text-end float-end mb-2">
                             รายละเอียด</p>
                     </div>
                 </div>
@@ -99,3 +99,10 @@
         ?>
     </div>
 </div>
+
+<script>
+    function me(){
+        alert("ระบบปิดปรับปรุง เปิดให้บริการปี 2570" )
+    }
+</script>
+
