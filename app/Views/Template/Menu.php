@@ -20,12 +20,17 @@
             <?php else : ?>
             <a href="<?= base_url('home'); ?>"
                 class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/home') || current_url() == base_url('/index.php/')) ? 'text-yellow-200 font-bold' : ''; ?>">หน้าแรก</a>
-            <a href="<?= base_url('list'); ?>"
-                class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/list')) ? 'text-yellow-200 font-bold' : ''; ?>">รถยนต์</a>
+            <a href="<?= base_url('product'); ?>"
+                class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/product')) ? 'text-yellow-200 font-bold' : ''; ?>">รถยนต์</a>
+            <a href="<?= base_url('test'); ?>"
+                class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/test')) ? 'text-yellow-200 font-bold' : ''; ?>">test</a>
             <?php endif; ?>
         </div>
 
         <div class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="<?= base_url('cart'); ?>"
+                class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/home') || current_url() == base_url('product/chart/')) ? 'text-yellow-200 font-bold' : ''; ?>">ตะกร้า</a>
+
             <button type="button" class="flex text-sm" id="user-menu-button" aria-expanded="false"
                 data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>

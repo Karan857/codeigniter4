@@ -6,22 +6,26 @@ use CodeIgniter\RESTful\ResourceController;
 
 use App\Models\UserModel;
 
-class User extends ResourceController {
+class User extends ResourceController
+{
     protected $modelName = 'App\Models\UserModel';
     protected $format = 'json';
 
     // index
-    public function index(){
-        return $this->respond($this->model->findAll()); 
+    public function index()
+    {
+        return $this->respond($this->model->findAll());
     }
 
     // get by id
-    public function Show($id = null){
-        return $this->respond($this->model->find($id)); 
+    public function Show($id = null)
+    {
+        return $this->respond($this->model->find($id));
     }
 
     // create
-    public function Create(){
+    public function Create()
+    {
         $data = $this->request->getPost();
 
         $validation = service('validation');
@@ -46,7 +50,8 @@ class User extends ResourceController {
     }
 
     // update
-    public function Modify(){
+    public function Modify()
+    {
         $data = $this->request->getRawInput();
         $validation = service('validation');
         $validation->setRules(array(
@@ -68,7 +73,8 @@ class User extends ResourceController {
     }
 
     // delete
-    public function Delete($id = null){
+    public function Delete($id = null)
+    {
         if ($this->model->find($id)) {
             if ($this->model->delete($id)) {
                 return $this->respondDeleted(['message' => 'User deleted successfully.']);
