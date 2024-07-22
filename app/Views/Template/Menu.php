@@ -1,11 +1,12 @@
 <nav class="bg-gradient-to-r from-teal-800 to-fuchsia-700 p-4">
     <div class="container mx-auto flex justify-between items-center">
-        <div class="text-white text-4xl font-bold">
+        <div class="text-red-600 text-4xl font-bold ">
             Car &<span class="text-orange-500 relative"> B &nbsp;
-                <i class="fas fa-bomb text-3xl ml-2 text-yellow-300 hover:text-yellow-500 hover:scale-150 hover:rotate-90 transition absolute"
-                    style="left:27px; top:10px">
+                <i class="fas fa-bomb text-3xl ml-2 text-yellow-300 hover:text-yellow-500 hover:scale-150 hover:rotate-90 hover:text-12xl transition absolute hover:left-[500px]"
+                    style="left:27px ; top:10px ">
                 </i>
                 mb</span>
+
         </div>
 
         <?php if (session()->get('logged_in')) : ?>
