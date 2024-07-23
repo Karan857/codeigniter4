@@ -21,7 +21,7 @@
 
 
                 <?php if (!$existingReservation) : ?>
-                    <a href="<?= site_url('product/' . $rowProduct['product_id'] . '/contact_1'); ?>">ทำสัญญา</a>
+                    <a href="<?= base_url('product/' . $rowProduct['product_id'] . '/contact_1'); ?>">ทำสัญญา</a>
                 <?php else : ?>
                     <button type="submit">จองไปแล้ว บักหัวดอ</button>
                 <?php endif; ?>
