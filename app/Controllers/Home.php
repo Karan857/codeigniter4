@@ -167,6 +167,9 @@ class Home extends BaseController
         $productModel = new ProductModel();
         $rowProduct = $productModel->find($id);
 
+        $userModel = new UserModel();
+        $users = $userModel->find(session()->get('user_id'));
+
         if (empty($rowProduct)) {
             session()->setFlashdata('alert_message', 'ไม่พบสินค้าที่ต้องการ');
             return redirect()->to('/product');
@@ -176,7 +179,8 @@ class Home extends BaseController
             'Home/Contract_1',
             array(
                 'title' => 'ข้อตกลงและเงื่อนไข',
-                'rowProduct' => $rowProduct
+                'product' => $rowProduct,
+                'user' => $users  
             )
         );
     }
