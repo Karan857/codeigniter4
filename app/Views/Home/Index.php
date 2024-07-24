@@ -5,7 +5,7 @@
                 <div class="relative h-[500px] overflow-hidden rounded-lg">
                     <?php foreach ($products as $index => $product) : ?>
                         <div class="hidden duration-700 ease-in-out <?= $index == 0 ? 'active' : '' ?>" data-carousel-item>
-                            <img src="<?= $product['image']; ?>" class="block object-cover w-full h-full" alt="<?= $product['name']; ?>">
+                            <img src="<?= $product['preview_image']; ?>" class="block object-cover w-full h-full" alt="<?= $product['name']; ?>">
                         </div>
                     <?php endforeach; ?>
                 </div>

@@ -1,16 +1,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= $title; ?></title>
+<style>
+    .detail {
+        width: 100%;
 
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+        .container {
+            margin: 2rem;
+            border-radius: 1rem;
+            background: gray;
+            width: auto;
+            display: flex;
+            flex-wrap: wrap;
+
+            .image {
+                flex: 3;
+                object-fit: cover;
+            }
+
+            .content {
+                flex: 2;
+                width: 100%;
+                padding: 2rem;
+                position: relative;
+
+                p {
+                    color: red;
+
+                    span {
+                        color: orange;
+                        position: relative;
+                        padding-right: 1rem;
+                    }
+                }
+
+                button {
+                    position: absolute;
+                    bottom: 2rem;
+                    right: 2rem;
+                    padding: 0.25rem 1rem;
+                    border-radius: 1rem;
+                    background: teal;
+                }
+
+            }
+
+
+        }
+
+
+    }
+
+    .contract_2 {
+        margin: 1rem 4rem;
+        border-radius: 1rem;
+        padding: 2rem;
+        border: 2px solid #cdcdcd;
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        form {
+            .container {
+                display: flex;
+                flex-direction: row;
+                margin: auto;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+
+                    div {
+
+                        input,
+                        textarea {
+                            gap: 1rem;
+                            width: 80vh;
+                            padding: 0.5rem;
+                            border-radius: 0.5rem;
+                            border: 1px solid #ccc;
+                            margin: 0.5rem;
+                        }
+                    }
+                }
+            }
+
+            .contract {
+                margin: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            button {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+
+
+    }
+</style>
+
 
 <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
-
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
 <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>

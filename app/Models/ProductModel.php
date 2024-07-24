@@ -14,6 +14,9 @@ class ProductModel extends Model
         'price',
         'year',
         'brand',
-        'image'
+        'preview_image',
+        'color_image1',
+        'color_image2',
+        'inside_image'
     ];
 }

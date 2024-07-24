@@ -5,7 +5,7 @@ Swal.fire({
     text: "<?= $message ?>",
     icon: "error"
 }).then(function() {
-    window.location.href = "<?= base_url() ?>product";
+    window.location.href = "<?= base_url() ?>admin/product";
 });
 <?php else: ?>
 Swal.fire({
@@ -13,7 +13,7 @@ Swal.fire({
     text: "<?= $message ?>",
     icon: "success"
 }).then(function() {
-    window.location.href = "<?= base_url() ?>product";
+    window.location.href = "<?= base_url() ?>admin/product";
 });
 <?php endif; ?>
 </script>

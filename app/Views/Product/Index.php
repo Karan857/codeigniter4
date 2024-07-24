@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 py-8">
-    <a href="<?= base_url('product/create'); ?>" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
+    <a href="<?= base_url('admin/product/create'); ?>" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
         เพิ่มรถยนต์
     </a>
 
@@ -22,14 +22,14 @@
                     <tr class="hover:bg-gray-50">
                         <td class="py-2 px-4 border-b text-center"><?= ($index + 1); ?></td>
                         <td class="py-2 px-4 border-b">
-                            <img src="<?= base_url() . $row['image']; ?>" class="w-24 h-auto object-cover" alt="<?= $row['image']; ?>">
+                            <img src="<?= base_url() . $row['preview_image']; ?>" class="w-24 h-auto object-cover" alt="<?= $row['preview_image']; ?>">
                         </td>
                         <td class="py-2 px-4 border-b"><?= $row['name']; ?></td>
                         <td class="py-2 px-4 border-b"><?= $row['desc']; ?></td>
                         <td class="py-2 px-4 border-b"><?= $row['brand']; ?></td>
                         <td class="py-2 px-4 border-b"><?= $row['price']; ?> บาท</td>
                         <td class="py-2 px-4 border-b text-center">
-                            <a href="<?= base_url('product/update/' . $row['product_id']); ?>" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
+                            <a href="<?= base_url('admin/product/update/' . $row['product_id']); ?>" class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-3 rounded">
                                 แก้ไข
                             </a>
                         </td>
@@ -61,7 +61,7 @@
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = '<?= base_url() . 'product/delete/' ?>' + target.dataset.id;
+                    location.href = '<?= base_url() . 'admin/product/delete/' ?>' + target.dataset.id;
                 }
             });
         }

@@ -8,12 +8,20 @@ use CodeIgniter\Router\RouteCollection;
 
 // menu
 $routes->get('/', 'Home::Index');
-$routes->get('/home', 'Home::Index');
 $routes->get('/shop', 'Shop::Index');
 
-// home for user
-$routes->get('/list', 'Home::List');
+// home
+$routes->get('/home', 'Home::Index');
+$routes->get('/product', 'Home::Product');
+$routes->get('product/(:num)', 'Home::Detail/$1');
+$routes->post('product/reserve', 'Home::Reserve');
+$routes->get('cart', 'Home::Cart');
+$routes->get('product/(:num)/contact_1', 'Home::Contract_1/$1');
+$routes->get('product/(:num)/contact_2', 'Home::Contract_2/$1');
 
+
+
+$routes->get('/test', 'Home::Test');
 
 //auth
 $routes->get('/login', 'Login::Index');
@@ -28,14 +36,14 @@ $routes->get('/user/update/(:num)', 'User::Update/$1');
 $routes->post('/user/update/submit', 'User::SubmitUpdate');
 $routes->get('/user/delete/(:num)', 'User::Delete/$1');
 
-
 // product
-$routes->get('/product', 'Product::Index');
-$routes->get('/product/create', 'Product::Create');
-$routes->post('/product/create/submit', 'Product::SubmitCreate');
-$routes->get('/product/update/(:num)', 'Product::Update/$1');
-$routes->post('/product/update/submit', 'Product::SubmitUpdate');
-$routes->get('/product/delete/(:num)', 'Product::Delete/$1');
+$routes->get('/admin/product', 'Product::Index');
+$routes->get('/admin/product/create', 'Product::Create');
+$routes->post('/admin/product/create/submit', 'Product::SubmitCreate');
+$routes->get('/admin/product/update/(:num)', 'Product::Update/$1');
+$routes->post('/admin/product/update/submit', 'Product::SubmitUpdate');
+$routes->get('/admin/product/delete/(:num)', 'Product::Delete/$1');
+
 
 //api
 $routes->resource('api/user');

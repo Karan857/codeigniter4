@@ -63,7 +63,10 @@ class Product extends BaseController
         $price = $this->request->getPost('price');
         $year = $this->request->getPost('year');
         $brand = $this->request->getPost('brand');
-        $image = $this->request->getFile('image');
+        $preview_image = $this->request->getFile('preview_image');
+        $color_image1 = $this->request->getFile('car_color1');
+        $color_image2 = $this->request->getFile('car_color2');
+        $inside_image = $this->request->getFile('inside_image');
 
         $message = array();
 
@@ -88,20 +91,33 @@ class Product extends BaseController
             'brand' => $brand,
         );
 
-        if ($image->isValid() && !$image->hasMoved()) {
+        if (
+            $preview_image->isValid() && !$preview_image->hasMoved() &&
+            $color_image1->isValid() && !$color_image1->hasMoved() &&
+            $color_image2->isValid() && !$color_image2->hasMoved() &&
+            $inside_image->isValid() && !$inside_image->hasMoved()
+        ) {
+
             $validationRule = array(
-                'image' => array(
+                'preview_image' => array(
                     'label' => 'ไฟล์รูปภาพ',
-                    'rules' => array(
-                        'uploaded[image]',
-                        'is_image[image]',
-                        'mime_in[image,image/jpg,image/jpeg,image/png,image/gif,image/webp]',
-                        'max_size[image,10485760]' // 10 MB
-                    )
+                    'rules' => 'uploaded[preview_image]|is_image[preview_image]|mime_in[preview_image,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[preview_image,10485760]'
+                ),
+                'car_color1' => array(
+                    'label' => 'ไฟล์รูปภาพ',
+                    'rules' => 'uploaded[car_color1]|is_image[car_color1]|mime_in[car_color1,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[car_color1,10485760]'
+                ),
+                'car_color2' => array(
+                    'label' => 'ไฟล์รูปภาพ',
+                    'rules' => 'uploaded[car_color2]|is_image[car_color2]|mime_in[car_color2,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[car_color2,10485760]'
+                ),
+                'inside_image' => array(
+                    'label' => 'ไฟล์รูปภาพ',
+                    'rules' => 'uploaded[inside_image]|is_image[inside_image]|mime_in[inside_image,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[inside_image,10485760]'
                 )
             );
 
-            if (!$this->validateData([], $validationRule)) {
+            if (!$this->validate($validationRule)) {
                 return (new Template())->Render(
                     'Product/SubmitCreate',
                     array(
@@ -112,17 +128,33 @@ class Product extends BaseController
                 );
             }
 
-            $newName = $image->getRandomName();
-            $image->move('uploads', $newName);
-            $insertData['image'] = 'uploads/' . $newName;
+            $PnewName = $preview_image->getRandomName();
+            $preview_image->move('uploads', 'P_' . $PnewName);
+            $C1newName = $color_image1->getRandomName();
+            $color_image1->move('uploads', 'C1_' . $C1newName);
+            $C2newName = $color_image2->getRandomName();
+            $color_image2->move('uploads', 'C2_' . $C2newName);
+            $ISnewName = $inside_image->getRandomName();
+            $inside_image->move('uploads', 'IS_' . $ISnewName);
+
+            $insertData['preview_image'] = 'uploads/' . 'P_' . $PnewName;
+            $insertData['color_image1'] = 'uploads/' . 'C1_' . $C1newName;
+            $insertData['color_image2'] = 'uploads/' . 'C2_' . $C2newName;
+            $insertData['inside_image'] = 'uploads/' . 'IS_' . $ISnewName;
+        } else {
+            // Handle invalid files
+            return (new Template())->Render(
+                'Product/SubmitCreate',
+                array(
+                    'title' => 'เพิ่มรถยนต์',
+                    'error' => true,
+                    'message' => 'หนึ่งในไฟล์รูปภาพไม่ถูกต้องหรือมีปัญหาในการอัปโหลด'
+                )
+            );
         }
 
         $productModel = new ProductModel();
-
-        // Ensuring $insertData is an array
-        if (is_array($insertData)) {
-            $insert = $productModel->insert((object)$insertData); // Cast array to object
-        }
+        $insert = $productModel->insert($insertData); // insertData is already an array
 
         if ($insert) {
             return (new Template())->Render(
@@ -144,6 +176,7 @@ class Product extends BaseController
             )
         );
     }
+
 
 
 
@@ -188,10 +221,10 @@ class Product extends BaseController
         $year = $this->request->getPost('year');
         $brand = $this->request->getPost('brand');
         $price = $this->request->getPost('price');
-        $image = $this->request->getFile('image');
-
-        $image = $this->request->getFile('image');
-
+        $preview_image = $this->request->getFile('preview_image');
+        $color_image1 = $this->request->getFile('car_color1');
+        $color_image2 = $this->request->getFile('car_color2');
+        $inside_image = $this->request->getFile('inside_image');
 
         $productModel = new ProductModel();
         $rowProduct = $productModel->find($id);
@@ -232,37 +265,109 @@ class Product extends BaseController
             'price' => $price,
         );
 
-        if ($image->isValid() && !$image->hasMoved()) {
-            $validationRule = array(
-                'image' => array(
-                    'label' => 'ไฟล์รูปภาพ',
-                    'rules' => array(
-                        'uploaded[image]',
-                        'is_image[image]',
-                        'mime_in[image, image/jpg,image/jpeg,image/png,image/gif,image/webp]',
-                        'max_size[image, 10485760]' // 10 MB
-                    )
-                )
-            );
-            if (!$this->validateData([], $validationRule)) {
+        $validationRule = array(
+            'preview_image' => array(
+                'label' => 'ไฟล์รูปภาพ',
+                'rules' => 'is_image[preview_image]|mime_in[preview_image,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[preview_image,10485760]'
+            ),
+            'car_color1' => array(
+                'label' => 'ไฟล์รูปภาพ',
+                'rules' => 'is_image[car_color1]|mime_in[car_color1,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[car_color1,10485760]'
+            ),
+            'car_color2' => array(
+                'label' => 'ไฟล์รูปภาพ',
+                'rules' => 'is_image[car_color2]|mime_in[car_color2,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[car_color2,10485760]'
+            ),
+            'inside_image' => array(
+                'label' => 'ไฟล์รูปภาพ',
+                'rules' => 'is_image[inside_image]|mime_in[inside_image,image/jpg,image/jpeg,image/png,image/gif,image/webp]|max_size[inside_image,10485760]'
+            )
+        );
+
+        // Validate and move preview_image
+        if ($preview_image->isValid() && !$preview_image->hasMoved()) {
+            if (!$this->validate(array('preview_image' => $validationRule['preview_image']))) {
                 return (new Template())->Render(
-                    'Product/SubmitCreate',
+                    'Product/SubmitUpdate',
                     array(
-                        'title' => 'เพิ่มรถยนต์',
-                        'error' => false,
+                        'title' => 'แก้ไขรถยนต์',
+                        'error' => true,
                         'message' => $this->validator->getErrors()
                     )
                 );
             }
-
-            $newName = $image->getRandomName();
-            $image->move('uploads', $newName);
-            $updateData['image'] = 'uploads/' . $newName;
-
-            if ($rowProduct['image'] != '' && file_exists($rowProduct['image'])) {
-                unlink($rowProduct['image']);
-            }
+            $PnewName = $preview_image->getRandomName();
+            $preview_image->move('uploads', 'P_' . $PnewName);
+            $updateData['preview_image'] = 'uploads/P_' . $PnewName;
         }
+
+        // Validate and move car_color1
+        if ($color_image1->isValid() && !$color_image1->hasMoved()) {
+            if (!$this->validate(array('car_color1' => $validationRule['car_color1']))) {
+                return (new Template())->Render(
+                    'Product/SubmitUpdate',
+                    array(
+                        'title' => 'แก้ไขรถยนต์',
+                        'error' => true,
+                        'message' => $this->validator->getErrors()
+                    )
+                );
+            }
+            $C1newName = $color_image1->getRandomName();
+            $color_image1->move('uploads', 'C1_' . $C1newName);
+            $updateData['color_image1'] = 'uploads/C1_' . $C1newName;
+        }
+
+        // Validate and move car_color2
+        if ($color_image2->isValid() && !$color_image2->hasMoved()) {
+            if (!$this->validate(array('car_color2' => $validationRule['car_color2']))) {
+                return (new Template())->Render(
+                    'Product/SubmitUpdate',
+                    array(
+                        'title' => 'แก้ไขรถยนต์',
+                        'error' => true,
+                        'message' => $this->validator->getErrors()
+                    )
+                );
+            }
+            $C2newName = $color_image2->getRandomName();
+            $color_image2->move('uploads', 'C2_' . $C2newName);
+            $updateData['color_image2'] = 'uploads/C2_' . $C2newName;
+        }
+
+        // Validate and move inside_image
+        if ($inside_image->isValid() && !$inside_image->hasMoved()) {
+            if (!$this->validate(array('inside_image' => $validationRule['inside_image']))) {
+                return (new Template())->Render(
+                    'Product/SubmitUpdate',
+                    array(
+                        'title' => 'แก้ไขรถยนต์',
+                        'error' => true,
+                        'message' => $this->validator->getErrors()
+                    )
+                );
+            }
+            $ISnewName = $inside_image->getRandomName();
+            $inside_image->move('uploads', 'IS_' . $ISnewName);
+            $updateData['inside_image'] = 'uploads/IS_' . $ISnewName;
+        }
+
+        // Remove old images if new ones are uploaded
+        if (isset($updateData['preview_image']) && file_exists($rowProduct['preview_image'])) {
+            unlink($rowProduct['preview_image']);
+        }
+        if (isset($updateData['car_image1']) && file_exists($rowProduct['color_image1'])) {
+            unlink($rowProduct['color_image1']);
+        }
+        if (isset($updateData['car_image2']) && file_exists($rowProduct['color_image2'])) {
+            unlink($rowProduct['color_image2']);
+        }
+        if (isset($updateData['inside_image']) && file_exists($rowProduct['inside_image'])) {
+            unlink($rowProduct['inside_image']);
+        }
+
+        // Debugging: Log the updateData array before updating the database
+        log_message('debug', 'Update Data: ' . print_r($updateData, true));
 
         $update = $productModel->update($id, $updateData);
         if ($update) {
@@ -287,6 +392,7 @@ class Product extends BaseController
         );
     }
 
+
     // หน้าลบสินค้า
     public function Delete($id)
     {
@@ -307,8 +413,16 @@ class Product extends BaseController
             );
         }
 
-        if ($rowProduct['image'] != '' && file_exists($rowProduct['image'])) {
-            unlink($rowProduct['image']);
+        if (
+            $rowProduct['preview_image'] != '' && file_exists($rowProduct['preview_image']) &&
+            $rowProduct['color_image1'] != '' && file_exists($rowProduct['color_image1']) &&
+            $rowProduct['color_image2'] != '' && file_exists($rowProduct['color_image2']) &&
+            $rowProduct['inside_image'] != '' && file_exists($rowProduct['inside_image'])
+        ) {
+            unlink($rowProduct['preview_image']);
+            unlink($rowProduct['color_image1']);
+            unlink($rowProduct['color_image2']);
+            unlink($rowProduct['inside_image']);
         }
 
         $delete = $productModel->delete($id);
