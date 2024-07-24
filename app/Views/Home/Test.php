@@ -5,10 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+    button {
+        padding: 1rem;
+        border: none;
+        background-color: red;
+
+    }
+
+    @keyframes spinAndScale {
+        0% {
+            transform: rotate(0deg) scale(1);
+        }
+
+        50% {
+            transform: rotate(180deg) scale(1.5);
+        }
+
+        100% {
+            transform: rotate(360deg) scale(1);
+        }
+    }
+
+    /* Hover effect with animation */
+    button:hover {
+        background: blue;
+        animation-name: spinAndScale;
+        animation-duration: 2s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+    </style>
 </head>
 
 <body>
+    <div class="test">
+        <button type="button">Hover Over Me!</button>
+
+    </div>
     <h1>User Data</h1>
+
     <table id="userTable" border="1">
         <thead>
             <tr>

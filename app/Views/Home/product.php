@@ -98,9 +98,9 @@
             ?>
             <div
                 class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <?php if ($product['image'] != '' && file_exists($product['image'])) : ?>
+                <?php if ($product['preview_image'] != '' && file_exists($product['preview_image'])) : ?>
                 <img class="p-8 rounded-t-lg w-full h-[200px] bg-cover border-gray-200 shadow-sm shadow-gray-500/50 shadow-bottom mb-5 object-fit"
-                    src="<?= $product['image']; ?>" alt="image" />
+                    src="<?= $product['preview_image']; ?>" alt="image" />
                 <?php endif ?>
                 <div class="px-5 pb-3 text-start">
                     <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

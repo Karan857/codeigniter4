@@ -47,6 +47,11 @@
 </head>
 
 <body>
+    <!-- <?php if (!$existingReservation) : ?>
+    <a href="<?= base_url('product/' . $rowProduct['product_id'] . '/contact_1'); ?>">ทำสัญญา</a>
+    <?php else : ?>
+    <button type="submit">จองไปแล้ว บักหัวดอ</button>
+    <?php endif; ?> -->
     <div class="container">
         <h1>ข้อตกลงและเงื่อนไขการจองรถ</h1>
         <div class="agreement">
