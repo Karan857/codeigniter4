@@ -186,7 +186,6 @@
 
                 h2 {
                     font-size: 15rem;
-                    letter-spacing: 3rem;
                     font-family: "Permanent Marker", cursive;
                     font-weight: 400;
                     font-style: normal;
@@ -198,16 +197,16 @@
                 h1 {
                     position: absolute;
                     top: 8rem;
-                    font-size: 15rem;
+                    font-size: 10rem;
                     left: 30%;
                     background: linear-gradient(to right, darkred, orange);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     font: uppercase;
                     font-weight: bold;
-                    letter-spacing: 1rem;
                     animation: text 8s both;
                     animation-timeline: view(50% auto);
+                    width: 100%;
                 }
             }
         }
@@ -344,12 +343,14 @@
                 width: 100%;
                 height: 100%;
                 background: linear-gradient(to left,
-                        rgba(0, 0, 0, 0.7) 0%,
+                        rgba(0, 0, 0, 0) 0%,
                         rgba(0, 0, 0, 1) 100%);
-                z-index: 1;
+
             }
 
             .image {
+                background: white;
+
                 flex: 2;
 
                 img {
@@ -385,7 +386,7 @@
                         position: absolute;
                         bottom: 3rem;
                         right: 10%;
-                        color: white;
+                        color: black;
                         z-index: 888;
                         font-size: 2rem;
                         font-weight: bold;
@@ -431,14 +432,12 @@
                     padding-bottom: 1rem;
                     margin: 1rem;
 
-                    animation: slideLeft 1s both;
-                    animation-timeline: view();
+
                 }
 
                 h2 {
                     margin: 1rem 3rem;
-                    animation: slideRight 1s both;
-                    animation-timeline: view();
+
                 }
 
                 h3 {
@@ -453,8 +452,7 @@
                     align-items: center;
                     margin: 2rem;
 
-                    animation: opacity 1s both;
-                    animation-timeline: view();
+
 
                     .color {
                         display: flex;
