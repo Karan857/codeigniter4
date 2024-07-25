@@ -141,7 +141,14 @@ class Home extends BaseController
                 $reservation['product_price'] = $product['price'];
                 $reservation['product_year'] = $product['year'];
                 $reservation['product_brand'] = $product['brand'];
-                $reservation['product_image'] = $product['image'];
+                $reservation['product_image'] = $product['preview_image'];
+            } else {
+                $reservation['product_name'] = '';
+                $reservation['product_desc'] = '';
+                $reservation['product_price'] = 0;
+                $reservation['product_year'] = '';
+                $reservation['product_brand'] = '';
+                $reservation['product_image'] = '';
             }
 
             $detailedReservations[] = $reservation;
@@ -222,5 +229,16 @@ class Home extends BaseController
                 'user' => $users
             )
         );
+    }
+
+    public function CartDelete()
+    {
+        if (!session()->get('logged_in')) {
+            return redirect()->to('/login');
+        }
+        $reserveModel = new ReserveModel();
+        $reservationId = $this->request->getPost('id'); // Getting the ID from POST request
+        $reserveModel->where('product_id', $reservationId)->delete();
+        return redirect()->back();
     }
 }

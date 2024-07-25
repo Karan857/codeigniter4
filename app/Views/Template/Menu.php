@@ -106,11 +106,20 @@
                     <a href="<?= base_url('home'); ?>" class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/home') || current_url() == base_url('/index.php/')) ? 'text-yellow-200 font-bold' : ''; ?>">หน้าแรก</a>
                     <a href="<?= base_url('product'); ?>" class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/product')) ? 'text-yellow-200 font-bold' : ''; ?>">รถยนต์</a>
 
-                    <div>
+                    <div style="position:relative; display: inline-block;">
+                        <p style="position: absolute;
+            right: -5px;
+            top: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 4px;
+            font-size: 12px;
+            line-height: 1;"><?= $countCart ?></p>
                         <i class="fas fa-shopping-cart cart-icon" id="cart-toggle"></i>
                         <div class="cart" id="cart">
                             <?php if (!empty($cart)) : ?> <table>
-                                    <a href="">รายการสินค้าทั้งหมด </a>
+                                    <a href="<?=base_url('cart')?>" class="text-white">รายการจองรถทั้งหมด ( <?=$countCart?> )</a>
                                     <thead>
                                         <tr>
                                             <th>รูปภาพ</th>
@@ -128,8 +137,9 @@
                                                 <td><?= $item['name'] ?></td>
                                                 <td><?= number_format($item['price']) ?> THB</td>
                                                 <td>
-                                                    <form action="<?= base_url('cart/delete/' . $item['product_id']) ?>" method="post">
-                                                        <button type="submit">ลบ</button>
+                                                    <form action="<?= base_url('cart/delete') ?>" method="post">
+                                                        <input type="hidden" name="id" value="<?= $item['product_id'] ?>">
+                                                        <button type="submit">ยกเลิกการจอง</button>
                                                     </form>
                                                 </td>
 

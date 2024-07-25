@@ -15,7 +15,10 @@ $routes->get('/home', 'Home::Index');
 $routes->get('/product', 'Home::Product');
 $routes->get('product/(:num)', 'Home::Detail/$1');
 $routes->post('product/reserve', 'Home::Reserve');
-$routes->get('cart', 'Home::Cart');
+
+$routes->get('/cart', 'Home::Cart');
+$routes->post('cart/delete', 'Home::CartDelete');
+
 $routes->get('product/(:num)/contact_1', 'Home::Contract_1/$1');
 $routes->get('product/(:num)/contact_2', 'Home::Contract_2/$1');
 

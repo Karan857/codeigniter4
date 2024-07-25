@@ -17,6 +17,8 @@ class Template extends BaseController
             $reserveModel = new ReserveModel();
             $reservedProducts = $reserveModel->where('user_id', session()->get('user_id'))->findAll();
 
+           
+
             $productModel = new ProductModel();
             $detailedCart = [];
 
@@ -32,7 +34,10 @@ class Template extends BaseController
                 }
             }
 
+            $countCart = count($detailedCart);
+
             $data['cart'] = $detailedCart;
+            $data['countCart'] = $countCart;
         }
 
         $data['template'] = array(
