@@ -7,5 +7,5 @@ use CodeIgniter\Model;
 class ReserveModel extends Model
 {
     protected $table = 'reserve';
-    protected $allowedFields = ['product_id', 'user_id'];
+    protected $allowedFields = ['product_id', 'user_id', 'product_image'];
 }

@@ -2,12 +2,12 @@
     <div class="contract_2">
         <h1>รายละเอียดการจองรถยนต์</h1>
         <?php if ($product['image'] != '' && file_exists($product['image'])) : ?>
-            <img  class="p-8 rounded-t-lg w-full h-[200px] bg-cover border-gray-200 shadow-sm shadow-gray-500/50 shadow-bottom mb-5 object-fit" src="<?= $product['image']; ?>" alt="image" />
+            <img class="p-8 rounded-t-lg w-full h-[200px] bg-cover border-gray-200 shadow-sm shadow-gray-500/50 shadow-bottom mb-5 object-fit" src="<?= $product['image']; ?>" alt="image" />
             <p><?= $product['image']; ?></p>
-        <?php endif ?> 
+        <?php endif ?>
         <form action="<?= site_url('product/reserve'); ?>" enctype="multipart/form-data" method="post">
             <div class="container">
-                
+
                 <div>
                     <h1>ข้อมูลส่วนตัวผู้ซื้อ</h1>
                     <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
@@ -27,7 +27,7 @@
                     </div>
                     <div>
                         <label for="address">ที่อยู่</label>
-                        <textarea id="address" name="address" rows="4" required></textarea>
+                        <input type="text" value="<?= $user['address']; ?>" id="address" name="address" rows="4" required></input>
                     </div>
                 </div>
                 <div>

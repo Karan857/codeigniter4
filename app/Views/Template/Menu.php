@@ -6,7 +6,7 @@
     }
 
     .cart {
-        width: 400px;
+        width: 500px;
         background-color: #353432;
         color: #eee;
         position: fixed;
@@ -17,6 +17,11 @@
         transition: right 0.3s ease;
         padding: 20px;
         z-index: 8888;
+        overflow: scroll;
+    }
+
+    .cart::-webkit-scrollbar {
+        display: none;
     }
 
     .cart.open {
@@ -72,6 +77,14 @@
             transform: scale(1.5);
         }
     }
+
+    .cart table {
+        width: 100%;
+        border-collapse: separate;
+        /* ใช้ 'collapse' หากไม่ต้องการระยะห่างระหว่างเซลล์ */
+        border-spacing: 0 10px;
+        /* เพิ่มระยะห่างระหว่างแถว (10px) */
+    }
 </style>
 
 <nav class="bg-gradient-to-r from-teal-800 to-fuchsia-700 p-4">
@@ -92,12 +105,50 @@
                 <?php else : ?>
                     <a href="<?= base_url('home'); ?>" class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/home') || current_url() == base_url('/index.php/')) ? 'text-yellow-200 font-bold' : ''; ?>">หน้าแรก</a>
                     <a href="<?= base_url('product'); ?>" class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/product')) ? 'text-yellow-200 font-bold' : ''; ?>">รถยนต์</a>
-                    <a href="<?= base_url('test'); ?>" class="text-white hover:text-yellow-200 transition text-xl <?= (current_url() == base_url('/index.php/test')) ? 'text-yellow-200 font-bold' : ''; ?>">test</a>
+
                     <div>
                         <i class="fas fa-shopping-cart cart-icon" id="cart-toggle"></i>
                         <div class="cart" id="cart">
-                            <h2>Shopping Cart</h2>
-                            <p>Your cart is empty.</p>
+                            <?php if (!empty($cart)) : ?> <table>
+                                    <a href="">รายการสินค้าทั้งหมด </a>
+                                    <thead>
+                                        <tr>
+                                            <th>รูปภาพ</th>
+                                            <th>ชื่อ</th>
+                                            <th>ราคา</th>
+                                            <th>ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $totalPrice = 0; ?>
+                                        <?php foreach ($cart as $item) : ?>
+                                            <tr>
+                                                <td><img style="width:200px" src="<?= $item['image'] ?>">
+                                                </td>
+                                                <td><?= $item['name'] ?></td>
+                                                <td><?= number_format($item['price']) ?> THB</td>
+                                                <td>
+                                                    <form action="<?= base_url('cart/delete/' . $item['product_id']) ?>" method="post">
+                                                        <button type="submit">ลบ</button>
+                                                    </form>
+                                                </td>
+
+
+                                                <?php $totalPrice += $item['price']; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="text-align: left;"><strong>ราคารวม</strong></td>
+                                            <td><strong id="total-price"><?= number_format($totalPrice) ?></strong> บาท</td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            <?php else : ?>
+                                <p>No items in cart.</p>
+                            <?php endif; ?>
+
                             <button class="close-btn" id="close-cart">Close</button>
                         </div>
                     </div>

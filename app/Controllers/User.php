@@ -11,15 +11,15 @@ class User extends BaseController
     // หน้ารายการผู้ใช้
     public function Index()
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
         $userModel = new UserModel();
         $users = $userModel->findAll();
 
-        return (new Template())->Render('User/Index',
+        return (new Template())->Render(
+            'User/Index',
             array(
                 'title' => 'รายการผู้ใช้งาน',
                 'users' => $users
@@ -31,12 +31,12 @@ class User extends BaseController
     // หน้าฟอร์มในการกรอกเพิ่มผู้ใช้
     public function Create()
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
-        return (new Template())->Render('User/Create',
+        return (new Template())->Render(
+            'User/Create',
             array(
                 'title' => 'เพิ่มผู้ใช้งาน'
             )
@@ -47,8 +47,7 @@ class User extends BaseController
     // หน้า submit ฟอร์มเพิ่มผู้ใช้งาน
     public function SubmitCreate()
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
@@ -57,6 +56,7 @@ class User extends BaseController
         $name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
         $phoneNumber = $this->request->getPost('phoneNumber');
+        $address = $this->request->getPost('address');
 
         $message = array();
 
@@ -67,9 +67,9 @@ class User extends BaseController
         if (empty($name))
             $message[] = 'ชื่อ นามสกุล';
 
-        if (!empty($message))
-        {
-            return (new Template())->Render('User/SubmitCreate',
+        if (!empty($message)) {
+            return (new Template())->Render(
+                'User/SubmitCreate',
                 array(
                     'title' => 'เพิ่มผู้ใช้งาน',
                     'error' => true,
@@ -79,9 +79,9 @@ class User extends BaseController
         }
 
         $userModel = new UserModel();
-        if ($userModel->where('username', $username)->countAllResults() > 0)
-        {
-            return (new Template())->Render('User/SubmitCreate',
+        if ($userModel->where('username', $username)->countAllResults() > 0) {
+            return (new Template())->Render(
+                'User/SubmitCreate',
                 array(
                     'title' => 'เพิ่มผู้ใช้งาน',
                     'error' => true,
@@ -97,12 +97,13 @@ class User extends BaseController
                 'name' => $name,
                 'email' => $email,
                 'phone_number' => $phoneNumber,
+                'address' => $address,
                 'role' => 'user'
             )
         );
-        if ($insert)
-        {
-            return (new Template())->Render('User/SubmitCreate',
+        if ($insert) {
+            return (new Template())->Render(
+                'User/SubmitCreate',
                 array(
                     'title' => 'เพิ่มผู้ใช้งาน',
                     'error' => false,
@@ -111,7 +112,8 @@ class User extends BaseController
             );
         }
 
-        return (new Template())->Render('User/SubmitCreate',
+        return (new Template())->Render(
+            'User/SubmitCreate',
             array(
                 'title' => 'เพิ่มผู้ใช้งาน',
                 'error' => true,
@@ -124,24 +126,22 @@ class User extends BaseController
     // หน้าฟอร์มในการแก้ไขผู้ใช้งาน
     public function Update($id)
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
-        if (empty($id))
-        {
+        if (empty($id)) {
             return redirect()->to('/user');
         }
 
         $rowUser = (new UserModel())->find($id);
 
-        if (empty($rowUser))
-        {
+        if (empty($rowUser)) {
             return redirect()->to('/user');
         }
 
-        return (new Template())->Render('User/Update',
+        return (new Template())->Render(
+            'User/Update',
             array(
                 'title' => 'แก้ไขผู้ใช้งาน',
                 'rowUser' => $rowUser
@@ -153,8 +153,7 @@ class User extends BaseController
     // หน้า submit ฟอร์มแก้ไขผู้ใช้งาน
     public function SubmitUpdate()
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
@@ -163,12 +162,13 @@ class User extends BaseController
         $name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
         $phoneNumber = $this->request->getPost('phoneNumber');
+        $address = $this->request->getPost('address');
 
         $userModel = new UserModel();
         $rowUser = $userModel->find($id);
-        if (empty($rowUser))
-        {
-            return (new Template())->Render('User/SubmitUpdate',
+        if (empty($rowUser)) {
+            return (new Template())->Render(
+                'User/SubmitUpdate',
                 array(
                     'title' => 'แก้ไขผู้ใช้งาน',
                     'error' => true,
@@ -185,9 +185,9 @@ class User extends BaseController
         if (empty($name))
             $message[] = 'ชื่อ นามสกุล';
 
-        if (!empty($message))
-        {
-            return (new Template())->Render('User/SubmitUpdate',
+        if (!empty($message)) {
+            return (new Template())->Render(
+                'User/SubmitUpdate',
                 array(
                     'title' => 'แก้ไขผู้ใช้งาน',
                     'error' => true,
@@ -202,9 +202,9 @@ class User extends BaseController
                 'username' => $username,
                 'user_id !=' => $id
             )
-        )->countAllResults() > 0)
-        {
-            return (new Template())->Render('User/SubmitUpdate',
+        )->countAllResults() > 0) {
+            return (new Template())->Render(
+                'User/SubmitUpdate',
                 array(
                     'title' => 'แก้ไขผู้ใช้งาน',
                     'error' => true,
@@ -214,17 +214,19 @@ class User extends BaseController
             );
         }
 
-        $update = $userModel->update($id,
+        $update = $userModel->update(
+            $id,
             array(
                 'username' => $username,
                 'name' => $name,
                 'email' => $email,
-                'phone_number' => $phoneNumber
+                'phone_number' => $phoneNumber,
+                'address' => $address
             )
         );
-        if ($update)
-        {
-            return (new Template())->Render('User/SubmitUpdate',
+        if ($update) {
+            return (new Template())->Render(
+                'User/SubmitUpdate',
                 array(
                     'title' => 'แก้ไขผู้ใช้งาน',
                     'error' => false,
@@ -233,7 +235,8 @@ class User extends BaseController
             );
         }
 
-        return (new Template())->Render('User/SubmitUpdate',
+        return (new Template())->Render(
+            'User/SubmitUpdate',
             array(
                 'title' => 'แก้ไขผู้ใช้งาน',
                 'error' => true,
@@ -247,16 +250,15 @@ class User extends BaseController
     // หน้าลบผู้ใช้งาน
     public function Delete($id)
     {
-        if (!session()->get('logged_in'))
-        {
+        if (!session()->get('logged_in')) {
             return redirect()->to('/login');
         }
 
         $userModel = new UserModel();
         $rowUser = $userModel->find($id);
-        if (empty($rowUser))
-        {
-            return (new Template())->Render('User/Delete',
+        if (empty($rowUser)) {
+            return (new Template())->Render(
+                'User/Delete',
                 array(
                     'title' => 'ลบผู้ใช้งาน',
                     'error' => true,
@@ -266,9 +268,9 @@ class User extends BaseController
         }
 
         $delete = $userModel->delete($id);
-        if ($delete)
-        {
-            return (new Template())->Render('User/Delete',
+        if ($delete) {
+            return (new Template())->Render(
+                'User/Delete',
                 array(
                     'title' => 'ลบผู้ใช้งาน',
                     'error' => false,
@@ -277,7 +279,8 @@ class User extends BaseController
             );
         }
 
-        return (new Template())->Render('User/Delete',
+        return (new Template())->Render(
+            'User/Delete',
             array(
                 'title' => 'ลบผู้ใช้งาน',
                 'error' => true,

@@ -19,6 +19,9 @@
                         Phone Number
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Address
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Role
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -27,34 +30,37 @@
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($users as $index => $row): ?>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <?= ($index + 1); ?>
-                    </th>
-                    <td class="px-6 py-4">
-                    <?= $row['username']; ?>
-                    </td>
-                    <td class="px-6 py-4">
-                    <?= $row['name']; ?>
-                    </td>
-                    <td class="px-6 py-4">
-                    <?= $row['email']; ?>
-                    </td>
-                    <td class="px-6 py-4">
-                    <?= $row['phone_number']; ?>
-                    </td>
-                    <td class="px-6 py-4">
-                    <?= $row['role']; ?>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <a href="<?= base_url() . 'user/update/' . $row['user_id']; ?>"  class="font-medium text-blue-600 dark:text-blue-500 hover:text-blue-900 mx-2"><i class="fas fa-pencil"></i></a>
-                         
-                        <button action="delete" data-id="<?= $row['user_id']; ?>" class="font-medium text-red-600 dark:text-red-500 hover:text-yellow-500"><i class="fa fa-trash delete-icon"></i></button>
-                    </td>
-                </tr>
+                <?php foreach ($users as $index => $row) : ?>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <?= ($index + 1); ?>
+                        </th>
+                        <td class="px-6 py-4">
+                            <?= $row['username']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $row['name']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $row['email']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $row['phone_number']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $row['address']; ?>
+                        </td>
+                        <td class="px-6 py-4">
+                            <?= $row['role']; ?>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="<?= base_url() . 'user/update/' . $row['user_id']; ?>" class="font-medium text-blue-600 dark:text-blue-500 hover:text-blue-900 mx-2"><i class="fas fa-pencil"></i></a>
+
+                            <button action="delete" data-id="<?= $row['user_id']; ?>" class="font-medium text-red-600 dark:text-red-500 hover:text-yellow-500"><i class="fa fa-trash delete-icon"></i></button>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
-               
+
             </tbody>
         </table>
     </div>

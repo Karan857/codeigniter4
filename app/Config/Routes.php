@@ -23,6 +23,8 @@ $routes->get('product/(:num)/contact_2', 'Home::Contract_2/$1');
 
 $routes->get('/test', 'Home::Test');
 
+
+
 //auth
 $routes->get('/login', 'Login::Index');
 $routes->post('/login/check', 'Login::Check');
@@ -43,20 +45,3 @@ $routes->post('/admin/product/create/submit', 'Product::SubmitCreate');
 $routes->get('/admin/product/update/(:num)', 'Product::Update/$1');
 $routes->post('/admin/product/update/submit', 'Product::SubmitUpdate');
 $routes->get('/admin/product/delete/(:num)', 'Product::Delete/$1');
-
-
-//api
-$routes->resource('api/user');
-
-//get
-$routes->get('/api/user', 'Api\User::Index');
-$routes->get('/api/user/(:num)', 'Api\User::Show/$1');
-
-//post
-$routes->post('/api/user', 'Api\User::Create');
-
-//update
-$routes->put('/api/user', 'Api\User::Modify');
-
-//delete
-$routes->delete('/api/user/(:num)', 'Api\User::Delete/$1');

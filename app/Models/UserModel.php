@@ -14,6 +14,7 @@ class UserModel extends Model
         'role',
         'name',
         'email',
-        'phone_number'
+        'phone_number',
+        'address'
     ];
 }

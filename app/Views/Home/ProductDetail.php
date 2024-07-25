@@ -568,7 +568,7 @@
                         <div id="red" class="red"></div>
 
                     </div>
-                    <a href="<?= base_url('reserve') ?>">จองรถ</a>
+                    <a href="<?= base_url('product/' . $rowProduct['product_id'] . '/contact_1') ?>">จองรถ</a>
                 </div>
             </div>
         </div>

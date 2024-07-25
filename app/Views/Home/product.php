@@ -78,7 +78,7 @@
     </div>
 
     <div class="mt-[100px] text-center">
-        <h1 class="text-3xl font-bold mt-[100px]">Store Car</h1>
+        <h1 class="text-3xl font-bold mt-[100px] text-white">Store Car</h1>
         <hr class="w-[100px] mx-auto mt-2 my-[30px]" style="border: 2px solid blue;">
 
         <div class="grid grid-cols-4 gap-5 mx-[50px] my-3">
